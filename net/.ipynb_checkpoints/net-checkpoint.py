@@ -40,12 +40,9 @@ class Net:
             tuple([self.layers[0].num_inputs] + [layer.num_outputs for layer in self.layers]),
             self.lr,
             self.loss)
-    
-    def add(self, layer):
-        self.layers.append(layer)
 
     def backward(self, input, target):
-        '''get gradients for entire net from single forward pass.'''
+        '''get gradients for entire net.'''
         grad_w = []
         grad_b = []
 
@@ -73,7 +70,6 @@ class Net:
         return list(reversed(grad_w)), list(reversed(grad_b))
 
     def step(self, grads_w, grads_b):
-        '''apply gradients from single backward pass'''
         for i, layer in enumerate(self.layers):
             if layer.trainable:
                 layer.weights -= self.lr * grads_w[i]
