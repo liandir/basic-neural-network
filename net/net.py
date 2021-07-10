@@ -66,7 +66,6 @@ class Net:
             else:
                 delta = np.einsum('ik,jk->ij', delta, self.layers[i+1].weights) * layer(o[i], d=True)
             
-#             print(delta.shape, o[i].shape)
             dw = np.einsum('ij,ik->ijk', o[i], delta)
             db = delta
 
@@ -104,7 +103,6 @@ class Net:
                 epoch_loss.append(batch_loss)
                 losses_batches.append(batch_loss)
                 
-                # ladebalken
                 print("({:3.1f}%) [{}] - loss: {:.3f}/{:.3f}".format(
                     (i+1)/I*100,
                     "="*int(32*i/I) + ">" + "."*int(32*(I-i-1e-3)/I),
